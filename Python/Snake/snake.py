@@ -1,18 +1,17 @@
-#引用数据库与函数
 from turtle import *
 from gamebase import square
 from random import randrange
 from time import sleep
 import time
 
-#定义变量
+
 snake = [[0,0],[10,0],[20,0],[30,0],[40,0],[50,0]]
 apple_x = randrange(-20,18)*10
 apple_y = randrange(-19,19)*10
 aim_x = 0
 aim_y = 10 
 
-#定义函数
+
 Time=time.time()
 def change(x,y):
     global Time
@@ -70,7 +69,7 @@ def gameLoop():
 
     ontimer(gameLoop,200)
 
-#主程序
+
 setup(420,420,0,0)
 hideturtle()
 tracer(False)
