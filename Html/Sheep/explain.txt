@@ -1,0 +1,4 @@
+You need to find the animals on the surface and click them.
+You need three same animals in the pool to eliminate them.
+Only after eliminating all the animals can you win.
+If the pool is full, you will lose(the pool has six positions).

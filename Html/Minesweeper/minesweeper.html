@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minesweeper</title>
+    <style>
+      .box {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .item {
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .circle {
+        border: 10px solid #a33939;
+        border-radius: 100%;
+      }
+
+      .hide {
+        background-color: #b3b1b1;
+      }
+
+      .hide > * {
+        display: none;
+      }
+
+      .info:after {
+        content: "🚩";
+        color: #a86868;
+      }
+
+      .message {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="message"></div>
+    <div class="box"></div>
+  </body>
+  <script>
+    const rows = 20;
+    const cols = 20;
+    const size = 30;
+    const result = [];
+    let minesCount = 0;
+    const mines = {};
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        mines[i + "-" + j] = Math.random() > 0.9;
+        minesCount += mines[i + "-" + j];
+      }
+    }
+    const box = document.querySelector(".box");
+    const message = document.querySelector(".message");
+    message.innerHTML = `mine：${minesCount}`;
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const isMines = mines[i + "-" + j];
+        const number = Object.values({
+          0: mines[`${i - 1}-${j - 1}`],
+          1: mines[`${i - 1}-${j}`],
+          2: mines[`${i - 1}-${j + 1}`],
+          3: mines[`${i}-${j - 1}`],
+          4: mines[`${i}-${j + 1}`],
+          5: mines[`${i + 1}-${j - 1}`],
+          6: mines[`${i + 1}-${j}`],
+          7: mines[`${i + 1}-${j + 1}`],
+        }).filter((v) => v).length;
+        result.push(`<div class="item hide" data-v="${i}-${j}"
+                style="width:${size}px;height:${size}px"
+            >
+                ${
+                  isMines
+                    ? `<div class="circle"></div>`
+                    : `<div class="number">${number ? number : ""}</div>`
+                }
+            </div>`);
+      }
+    }
+    box.style.width = `${cols * size}px`;
+    box.style.height = `${rows * size}px`;
+    box.innerHTML = result.join("");
+    box.querySelectorAll(".item").forEach((v) => {
+      v.addEventListener("click", (e) => {
+        v.classList.remove("hide");
+        if (minesCount === box.querySelectorAll(".hide").length) {
+          alert("Congratulations! You won!");
+        } else if (v.querySelector(".circle")) {
+          setTimeout(
+            () => alert("The game failed. You stepped on a landmine."),
+            100
+          );
+        } else if (v.innerText.trim() === "") {
+          const indexs = v
+            .getAttribute("data-v")
+            .split("-")
+            .map((v) => Number(v));
+          const loop = (indexs) => {
+            [
+              [indexs[0] - 1, indexs[1] - 1],
+              [indexs[0] - 1, indexs[1]],
+              [indexs[0] - 1, indexs[1] + 1],
+              [indexs[0], indexs[1] - 1],
+              [indexs[0], indexs[1] + 1],
+              [indexs[0] + 1, indexs[1] - 1],
+              [indexs[0] + 1, indexs[1]],
+              [indexs[0] + 1, indexs[1] + 1],
+            ].forEach((subIndexs) => {
+              const el = document.querySelector(
+                `[data-v="${subIndexs.join("-")}"]`
+              );
+              if (el) {
+                const text = el.querySelector(".number").innerText.trim();
+                if (el.className.indexOf("hide") >= 0 && text === "") {
+                  el.classList.remove("hide");
+                  loop(subIndexs);
+                } else {
+                  el.classList.remove("hide");
+                }
+              }
+            });
+          };
+          loop(indexs);
+        }
+      });
+      v.addEventListener("contextmenu", (e) => {
+        v.classList.toggle("info");
+        message.innerHTML = `mine：${
+          minesCount - box.querySelectorAll(".info").length
+        }`;
+        e.preventDefault();
+      });
+    });
+  </script>
+</html>

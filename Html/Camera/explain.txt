@@ -1,0 +1,2 @@
+This is a camera.
+Press the "take" button to take a photo.
