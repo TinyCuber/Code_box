@@ -1,0 +1,405 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>个人简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            padding: 100px 6%;
+            background: linear-gradient(to right top, #ff1493, #2980b9);
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .profile {
+            padding: 20px 30px;
+            height: 230px;
+            background: #FFFFFF;
+            text-align: center;
+            flex: 1 1 400px;
+            position: sticky;
+            top: 20px;
+            border-right: 2px solid #333333;
+        }
+
+        .profile h3 {
+            font-size: 20px;
+        }
+
+        .profile p {
+            color: #2980b9;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 7px 20px;
+            border-radius: 5px;
+            background: #2980b9;
+            color: #FFFFFF;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #333333;
+        }
+
+        .information {
+            padding: 20px 30px;
+            flex: 1 1 1000px;
+            background: #FFFFFF; 
+        }
+
+        .title {
+            font-size: 25px;
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            font-size: 17px;
+            line-height: 2;
+            padding-bottom: 10px;
+            color: #777777;
+        }
+
+        .about .box-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .about .box-container .box {
+            flex: 1 1 250px;
+        }
+
+        .about .box-container .box h3 {
+            font-size: 15px;
+            padding: 10px 0;
+            color: #333333;
+        }
+
+        .about .box-container .box h3 span {
+            color: #777777;
+        }
+
+        .services {
+            padding: 20px 0;
+        }
+
+        .imgbox-container {
+            display: flex;
+        }
+
+        .imgbox-container .box {
+            flex: 1 1 17px;
+            text-align: center;
+            border-radius: 5px;
+            padding: 20px;
+            background: #eeeeee;
+            margin-right: 12px;
+        }
+
+        .imgbox-container .box img {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .imgbox-container .box h3 {
+            font-size: 15px;
+            color: #777777;
+        }
+
+        .skills .box-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .skills .box-container .box {
+            flex: 1 1 300px;
+        }
+
+        .skills .box-container .box:last-child {
+            margin-left: 12px;
+        }
+
+        .progress h3 {
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            color: #333333;
+            font-size: 15px;
+        }
+
+        .progress h3 span {
+            color: #777777;
+        }
+
+        .bar {
+            overflow: hidden;
+            border-radius: 50px;
+            height: 10px;
+            background: #eeeeee;
+        }
+
+        .bar span {
+            background: #2980b9;
+            height: 100%;
+            display: block;
+            border-radius: 50px;
+        }
+
+        .first {
+            width: 95%;
+        }
+
+        .second {
+            width: 80%;
+        }
+
+        .third {
+            width: 65%;
+        }
+
+        .fourth {
+            width: 70%;
+        }
+
+        .fifth {
+            width: 90%;
+        }
+
+        .sixth {
+            width: 75%;
+        }
+
+        .experience {
+            margin: 20px 0;
+        }
+
+        .experience .box-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .experience .box-container .box {
+            padding: 20px;
+            border-radius: 5px;
+            flex: 1 1 350px;
+            background: #eeeeee;
+        }
+
+        .experience .box-container .box span {
+            color: #2980b9;
+            font-size: 15px;
+        }
+
+        .experience .box-container .box h3 {
+            color: #333333;
+            font-size: 17px;
+            padding: 5px 0;
+        }
+
+        .experience .box-container .box p {
+            color: #777777;
+            line-height: 2;
+            font-size: 13px;
+        }
+
+        .contact .box-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .contact .box-container .box {
+            flex: 1 1 200px;
+            display: flex;
+        }
+
+        .contact .box-container .box i {
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            border-radius: 50%;
+            background: #2980b9;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .contact .box-container .box h3 {
+            font-size: 17px;
+            color: #333333;
+            padding-bottom: 5px;
+        }
+
+        .contact .box-container .box p {
+            font-size: 14px;
+            color: #777777;
+            line-height: 2;
+        }
+
+        .info {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="profile">
+            <img src="http://nocturne.bczcdn.com/file/1645597751069_39196/head.png" alt="">
+            <h3>Algo</h3>
+            <p>前端开发</p>
+            <div class="buttons">
+                <a class="btn" href="http://nocturne.bczcdn.com/audio/1647325026464_87789/小夜简历3.0.pdf" target="_blank">下载简历</a>
+                <a class="btn" href="javascript:alert('发送成功');">发送面试邀请</a>
+            </div>
+        </div>
+
+        <div class="information">
+
+            <div class="about">
+                <h3 class="title">About Me</h3>
+                <p>我叫Algo，小名是小夜，擅长Python，精通爬虫，可视化，数据分析，人工智能等领域。</p>
+                <p>不仅如此，我还能熟练使用前端语言独立制作电商网站，招聘网站等等，这个简历也是我用HTML和CSS完成的哦。</p>
+                <div class="box-container">
+                    <div class="box">
+                        <h3><span>年龄 : </span>20</h3>
+                        <h3><span>地址 : </span>四川，成都</h3>
+                        <h3><span>电话 : </span>1234567890</h3>
+                        <h3><span>邮箱 : </span>Algo@Yequ.Com</h3>
+                    </div>
+                    <div class="box">
+                        <h3><span>求职 : </span>Web Design</h3>
+                        <h3><span>语言 : </span>Hindi, English</h3>
+                        <h3><span>工龄 : </span>2 年</h3>
+                        <h3><span>现状 : </span>随时到岗</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services">
+                <h3 class="title">My Services</h3>
+                <div class="imgbox-container">
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598211806_42022/icon-1.png" alt="">
+                        <h3>HTML 5</h3>
+                    </div>
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598216656_89057/icon-2.png" alt="">
+                        <h3>CSS 3</h3>
+                    </div>
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598219832_4197/icon-3.png" alt="">
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598223509_63268/icon-4.png" alt="">
+                        <h3>Python</h3>
+                    </div>
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598226940_86454/icon-5.png" alt="">
+                        <h3>SQL</h3>
+                    </div>
+                    <div class="box">
+                        <img src="http://nocturne.bczcdn.com/file/1645598230253_49248/icon-6.png" alt="">
+                        <h3>C++</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills">
+                <h3 class="title">My Skills</h3>
+                <div class="box-container">
+                    <div class="box">
+                        <div class="progress">
+                            <h3>Html <span>95%</span></h3>
+                            <div class="bar"><span class="first"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>Css <span>80%</span></h3>
+                            <div class="bar"><span class="second"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>Javascript <span>65%</span></h3>
+                            <div class="bar"><span class="third"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>Photoshop <span>70%</span></h3>
+                            <div class="bar"><span class="fourth"></span></div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="progress">
+                            <h3>Web Design <span>90%</span></h3>
+                            <div class="bar"><span class="fifth"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>Graphic Design <span>75%</span></h3>
+                            <div class="bar"><span class="sixth"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>App Design <span>65%</span></h3>
+                            <div class="bar"><span class="third"></span></div>
+                        </div>
+                        <div class="progress">
+                            <h3>Digital Marketing <span>70%</span></h3>
+                            <div class="bar"><span class="fourth"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience">
+                <h3 class="title">My Experience</h3>
+                <div class="box-container">
+                    <div class="box">
+                        <span>2020 - 2022</span>
+                        <h3>前端工程师</h3>
+                        <p>主要负责夜曲优选前端页面开发、适配。</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact">
+                <h3 class="title">Contact Info</h3>
+                <div class="box-container">
+                    <div class="box">
+                        <i class="fas fa-map"></i>
+                        <div class="info">
+                            <h3>微信</h3>
+                            <p>Yequbiancheng</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <i class="fas fa-phone"></i>
+                        <div class="info">
+                            <h3>My Number</h3>
+                            <p>1234567890</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info">
+                            <h3>My Email</h3>
+                            <p>Algo@Yequ.Com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
