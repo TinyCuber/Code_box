@@ -1,0 +1,7 @@
+Press "W" change the direction of the square. 
+Press "S" let the square fall quickly.
+Press "A" change the position of the square.(left)
+Press "D" change the position of the square.(right)
+There are 2 models:
+①Classic: Normal way of playing.
+②Customize: You can set the size of the game interface.(width & height)

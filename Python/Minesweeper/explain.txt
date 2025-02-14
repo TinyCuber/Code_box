@@ -1,0 +1,9 @@
+Classic gameplay~
+If you want to regame, please click the emoji.
+There are 4 models:
+①Easy
+②Middle
+③Hard
+④Customize(you can set the square size and the number of mine)
+There is a "history", you can check your records, including number, model, time and result.
+You can choose the history and delete.
