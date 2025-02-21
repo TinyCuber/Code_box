@@ -4,3 +4,4 @@ If the snake hits the wall or its own body, you will lose.
 Press"W""S""A""D" to control the directions of the snake.
 If you want to play this game, please install the turtle module.(In cmd)
 (Installation command: pip install turtle)
+The mian program entrance is in the "snake.py" file.
