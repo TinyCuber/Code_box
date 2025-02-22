@@ -236,7 +236,7 @@ class Minesweeper:
         self.elapsed_time = int(time.time() - self.start_time)
         self.game_status_label.config(text="😎")
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.history_records.append((timestamp, self.current_mode, self.elapsed_time, "胜利"))
+        self.history_records.append((timestamp, self.current_mode, self.elapsed_time, "win"))
         messagebox.showinfo("Victory!", f"Congratulations, you won! Time: {self.elapsed_time} s")
 
     def update_timer(self):
