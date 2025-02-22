@@ -1,6 +1,6 @@
 # Code_box
 Introduce:
-- These projects are some classic games and some practicl tools. The languages are python, html, c++, and so on, mainly for relaxation. There is no need for too much complicated code, but mostly some easy-to-understand code.
+- These projects are some games and some practicl tools. The main purpose is to show real-world project examples of programming languages. The languages are python, html, c++, and so on, mainly for relaxation. There is no need for too much complicated code, but mostly some easy-to-understand code.
 
 Special things:
 - It is more suitable for the classic gameplay, but it has been appropriately improved to make the gameplay richer and more interesting.
