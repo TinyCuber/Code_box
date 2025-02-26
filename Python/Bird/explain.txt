@@ -1,4 +1,6 @@
-Press space  to contrrol the bird's flight.
+Press space  to control the bird's flight.
+Press Enter to adjust the speed.
+After entering the number(FPS>0), click enter again to complete the speed change.
 If the bird hits the pipe, you will lose.
 If you want to play this game, please install the pygame module.(In cmd)
 (Installation command: pip install pygame)
