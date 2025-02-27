@@ -1,0 +1,41 @@
+Operation Methods
+
+1.Create a Database
+Syntax: CREATE DATABASE <database_name>
+Function: Create a new database.
+
+2.Switch Databases
+Syntax: USE <database_name>
+Function: Switch to the specified database.
+
+3.Create a Table
+Syntax: CREATE TABLE <table_name> <column1> <column2> ...
+Function: Create a new table in the current database and specify column names.
+
+4.Delete a Table
+Syntax: DROP TABLE <table_name>
+Function: Delete the specified table from the current database.
+
+5.Insert Data
+Syntax: INSERT INTO <table_name> <value1> <value2> ...
+Function: Insert a row of data into the specified table. The order and number of values must be consistent with the table's column definitions.
+
+6.Query Data
+Syntax: SELECT FROM <table_name>
+Function: Query all data in the specified table and output it in a formatted table.
+
+7.Modify Data
+Syntax: UPDATE <table_name> <condition_column> <condition_value> <update_column> <update_value>
+Function: Update the specified column value of the records that meet the conditions in the specified table.
+
+8.Export Table Data to a File
+Syntax: EXPORT TABLE <table_name> <filename>
+Function: Export the data of the specified table to the specified file in a formatted table.
+
+9.View Operation History Records
+Syntax: SHOW HISTORY
+Function: Display all operation history records of databases and tables, including database names, table names, operation types, and detailed information.
+
+10.Exit the System
+Syntax: EXIT
+Function: Exit the database management system.
