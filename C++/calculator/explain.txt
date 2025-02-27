@@ -1,0 +1,11 @@
+Instructions for the Simple Calculator
+
+Launch the Program: Run the compiled executable file to start the calculator.
+Enter the First Number: After the program starts, you will see the prompt “Please enter the first number: ”. Enter the first number you want to use in the calculation and press Enter.
+Enter the Operator: Next, the prompt “Please enter the operator (+, -, *, /): ” will appear. Enter one of the four arithmetic operators (+ for addition, - for subtraction, * for multiplication, / for division) and press Enter.
+Enter the Second Number: Then, you'll be prompted with “Please enter the second number: ”. Enter the second number and press Enter.
+View the Result:
+If the operator you entered is valid and the divisor is not zero, the program will output the calculation result. For example, if you enter 3, +, 5, the program will display 3 + 5 = 8.
+If the operator you entered is not one of +, -, *, /, the program will show “Error: Invalid operator.”
+If you are performing a division and the divisor is zero, the program will show “Error: The divisor cannot be zero.”
+End the Program: The program will automatically end after the calculation is completed.
