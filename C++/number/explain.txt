@@ -1,0 +1,7 @@
+Instructions for the Number Guessing Game
+
+This is a simple number guessing game. At the start of the game, the program randomly generates an integer between 1 and 100 as the secret number. The player's task is to guess this secret number.
+Each time the player enters a guessed number, the program will compare it with the secret number and give corresponding prompts:
+If the number the player guessed is larger than the secret number, the program will prompt "Your guess is too high. Try again."
+If the number the player guessed is smaller than the secret number, the program will prompt "Your guess is too low. Try again."
+The player keeps guessing until they get the correct answer. When the player guesses correctly, the program will display "Congratulations! You guessed it right! You took [X] attempts in total.", where [X] is the total number of attempts the player made.
