@@ -1,3 +1,5 @@
+Special key differences: multiply "*", divide "/", root "x√y", reciprocal "1/x"
 When selecting and deleting history, you need to hold down the Ctrl key and left button to select the history, and then press the delete selected record key when the selection is complete.
-When calculating the square root (x√y), you need to write the root exponent in front and the number of open squares in the end, e.g. 2√4 in this calculator is formatted as 2x√y4.
+When calculating the square root (x√y), you need to write the root exponent in front and the number of open squares in the end, e.g. 2√4 is formatted as 2x√y4 in this calculator.
 Note: The number of factorials should not be too large, otherwise it will crash or give an error.
+Don't skip the multiplication sign every time you do a multiplication operation, otherwise an error will be reported.
