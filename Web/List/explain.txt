@@ -1,0 +1,17 @@
+To - do List Project Operation Guide
+
+Prerequisites
+Ensure that the index.html, styles.css, and script.js files are in the same directory.
+
+How to Run
+Double - click the index.html file to open it in your web browser.
+
+Adding a Task
+1.Enter the content of the to - do item in the input box labeled "Enter a new to - do item".
+2.You can either click the "Add" button or press the "Enter" key on your keyboard. The task will then be added to the list below.
+
+Marking a Task as Completed
+Check the checkbox next to the task. Once checked, the task text will be crossed out, indicating it's completed.
+
+Deleting a Task
+Click the "Delete" button next to the task you want to remove. The task will be immediately removed from the list.
