@@ -1,0 +1,5 @@
+Special key differences: root "x√y", reciprocal "1/x"
+When selecting and deleting history, you need to hold down the Ctrl key and left click to select the history, and then press the delete selected record key after the selection is complete.
+When calculating the square root (x√y), you need to write the root exponent in front and the number of empty squares at the end, e.g. 2√4 formatted as 2x√y4 in this calculator.
+Note: The number should not be too large, otherwise an error will be reported.
+When doing multiplication, don't forget the multiplication sign or you will get an error.
