@@ -1,46 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>camera</title>
-  </head>
-  <body>
-    <div id="contentHolder">
-      <video id="video" autoplay></video>
-      <canvas style="display: none" id="canvas"></canvas>
-      <img id="imgXX" src="" />
-    </div>
-    <button id="btn_snap" onclick="takePhoto()">take</button>
-    <script>
-      const cvs = document.getElementById("canvas");
-      const video = document.getElementById("video");
-      cvs.width = cvs.height = video.width = video.height = 400;
-      const { width, height } = cvs;
-      const ctx = cvs.getContext("2d");
 
-      const constraints = {
-        video: {
-          width,
-          height,
-        },
-      };
-      navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            width,
-            height,
-          },
-        })
-        .then((stream) => {
-          video.srcObject = stream;
-          video.onloadedmetadata = () => video.play();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Camera</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #video-container {
+            position: relative;
+        }
+
+        #video {
+            width: 640px;
+            height: 480px;
+        }
+
+        #photo-container {
+            margin-top: 20px;
+        }
+
+        #photos {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #photos img {
+            width: 200px;
+            height: auto;
+            margin: 5px;
+        }
+
+        #videos {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #videos video {
+            width: 200px;
+            height: auto;
+            margin: 5px;
+        }
+
+        .download-button {
+            margin: 5px;
+        }
+
+        input[type="checkbox"] {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Web Camera</h1>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+    </div>
+    <button id="capture-button">Capture Photo</button>
+    <button id="start-record-button">Start Recording</button>
+    <button id="stop-record-button" disabled>Stop Recording</button>
+    <button id="select-delete-button">Select Delete</button>
+    <button id="all-delete-button">All Delete</button>
+    <div id="photo-container">
+        <h2>Photos</h2>
+        <div id="photos"></div>
+    </div>
+    <div id="video-record-container">
+        <h2>Videos</h2>
+        <div id="videos"></div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const captureButton = document.getElementById('capture-button');
+        const startRecordButton = document.getElementById('start-record-button');
+        const stopRecordButton = document.getElementById('stop-record-button');
+        const selectDeleteButton = document.getElementById('select-delete-button');
+        const allDeleteButton = document.getElementById('all-delete-button');
+        const photosContainer = document.getElementById('photos');
+        const videosContainer = document.getElementById('videos');
+
+        let photos = [];
+        let videos = [];
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        // Access the camera
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+           .then((stream) => {
+                video.srcObject = stream;
+
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const videoUrl = URL.createObjectURL(blob);
+                    videos.push(videoUrl);
+
+                    const videoElement = document.createElement('video');
+                    videoElement.src = videoUrl;
+                    videoElement.controls = true;
+
+                    const downloadButton = document.createElement('button');
+                    downloadButton.textContent = 'Download';
+                    downloadButton.classList.add('download-button');
+                    downloadButton.addEventListener('click', () => {
+                        const link = document.createElement('a');
+                        link.href = videoUrl;
+                        link.download = `video_${videos.length - 1}.webm`;
+                        link.click();
+                    });
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = `video-checkbox-${videos.length - 1}`;
+
+                    const videoDiv = document.createElement('div');
+                    videoDiv.appendChild(checkbox);
+                    videoDiv.appendChild(videoElement);
+                    videoDiv.appendChild(downloadButton);
+                    videosContainer.appendChild(videoDiv);
+
+                    recordedChunks = [];
+                };
+            })
+           .catch((error) => {
+                console.error('Error accessing camera:', error);
+            });
+
+        // Capture a photo
+        captureButton.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const photoDataUrl = canvas.toDataURL('image/jpeg');
+            photos.push(photoDataUrl);
+
+            const img = document.createElement('img');
+            img.src = photoDataUrl;
+
+            const downloadButton = document.createElement('button');
+            downloadButton.textContent = 'Download';
+            downloadButton.classList.add('download-button');
+            downloadButton.addEventListener('click', () => {
+                const link = document.createElement('a');
+                link.href = photoDataUrl;
+                link.download = `photo_${photos.length - 1}.jpg`;
+                link.click();
+            });
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = `photo-checkbox-${photos.length - 1}`;
+
+            const photoDiv = document.createElement('div');
+            photoDiv.appendChild(checkbox);
+            photoDiv.appendChild(img);
+            photoDiv.appendChild(downloadButton);
+            photosContainer.appendChild(photoDiv);
         });
-      function takePhoto() {
-        ctx.drawImage(video, 0, 0, width, height);
-        document.getElementById("imgXX").src = canvas.toDataURL("image/png");
-      }
+
+        // Start recording video
+        startRecordButton.addEventListener('click', () => {
+            mediaRecorder.start();
+            startRecordButton.disabled = true;
+            stopRecordButton.disabled = false;
+        });
+
+        // Stop recording video
+        stopRecordButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            startRecordButton.disabled = false;
+            stopRecordButton.disabled = true;
+        });
+
+        // Select and delete
+        selectDeleteButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete the selected photos and videos?')) {
+                const photoCheckboxes = photosContainer.querySelectorAll('input[type="checkbox"]');
+                const newPhotos = [];
+                const newPhotoDivs = [];
+                photoCheckboxes.forEach((checkbox, index) => {
+                    if (!checkbox.checked) {
+                        newPhotos.push(photos[index]);
+                        newPhotoDivs.push(photosContainer.children[index]);
+                    }
+                });
+                photos = newPhotos;
+                photosContainer.innerHTML = '';
+                newPhotoDivs.forEach((div) => {
+                    photosContainer.appendChild(div);
+                });
+                // Update the id of the checkbox
+                const newPhotoCheckboxes = photosContainer.querySelectorAll('input[type="checkbox"]');
+                newPhotoCheckboxes.forEach((checkbox, index) => {
+                    checkbox.id = `photo-checkbox-${index}`;
+                });
+
+                const videoCheckboxes = videosContainer.querySelectorAll('input[type="checkbox"]');
+                const newVideos = [];
+                const newVideoDivs = [];
+                videoCheckboxes.forEach((checkbox, index) => {
+                    if (!checkbox.checked) {
+                        newVideos.push(videos[index]);
+                        newVideoDivs.push(videosContainer.children[index]);
+                    }
+                });
+                videos = newVideos;
+                videosContainer.innerHTML = '';
+                newVideoDivs.forEach((div) => {
+                    videosContainer.appendChild(div);
+                });
+                // Update the id of the checkbox
+                const newVideoCheckboxes = videosContainer.querySelectorAll('input[type="checkbox"]');
+                newVideoCheckboxes.forEach((checkbox, index) => {
+                    checkbox.id = `video-checkbox-${index}`;
+                });
+            }
+        });
+
+        // Delete all
+        allDeleteButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete all photos and videos?')) {
+                photos = [];
+                videos = [];
+                photosContainer.innerHTML = '';
+                videosContainer.innerHTML = '';
+            }
+        });
     </script>
-  </body>
+</body>
+
 </html>

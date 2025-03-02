@@ -1,2 +1,6 @@
-This is a camera.
-Press the "take" button to take a photo.
+Click the "Capture Photo" button to take a photo.
+Click the "Start Recording" button to record.
+Click the "Stop Recording" button to stop recording.
+Select(Click the box in the bottom left corner of the photo or video to tick it) first and then click the "Select Delete" button to delete.
+Click the "All Delete" button to delete them all.
+Click the "Deleteownload" button to download.
