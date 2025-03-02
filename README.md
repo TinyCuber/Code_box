@@ -51,6 +51,8 @@
 ### Add Python project
 
 ## 📬 Finally
+I'm individual developers.
+
 Everyone is welcome to express their opinions on Issues, find bugs and things you want to add.
 
 <div align="right">
