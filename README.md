@@ -35,17 +35,17 @@
 >Please configure your own editor to run the file, because the project has many programming languages, and don't forget to inject the necessary operations such as the library (all projects in this repository are VSCode edits)
 
 ## ⬆️ Update Notes
->[!TIPS]
+>[!TIP]
 >This repository is not a large project, but multiple small projects, so only the updated project is stated
 
 ### Add JavaScript project
->[!TIPS]
+>[!TIP]
 >Both html and JavaScript are put in the web folder because they are both front-ends.
 
 ### Add C++ project
 
 ### Add Html project
->[!TIPS]
+>[!TIP]
 >Both html and JavaScript are put in the web folder because they are both front-ends.
 
 ### Add Python project
