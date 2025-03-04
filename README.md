@@ -57,6 +57,6 @@ Everyone is welcome to express their opinions on Issues, find bugs and things yo
 
 <div align="right">
 
-[[Back to top]](#readme-top)
+[Back to top](#readme-top)
 
 </div>
