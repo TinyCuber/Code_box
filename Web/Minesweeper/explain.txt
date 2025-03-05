@@ -1,2 +1,7 @@
-Classic gameplay~
-Maybe have some "little" bug...
+If you want to play the game or regame, please click the emoji.
+There are 4 models:
+①Easy
+②Middle
+③Hard
+④Customize(you can set the square size and the number of mine)
+There is a "history", you can check your records, including model, time and result.

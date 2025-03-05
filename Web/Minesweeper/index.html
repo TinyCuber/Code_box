@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Minesweeper Game</h1>
+    <div id="game-panel">
+        <div id="controls">
+            <label for="difficulty">Difficulty Selection:</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                <option value="custom">Custom</option>
+            </select>
+            <div id="custom-settings" style="display: none;">
+                <label for="custom-rows">Rows:</label>
+                <input type="number" id="custom-rows" min="1" max="24" value="9">
+                <label for="custom-cols">Columns:</label>
+                <input type="number" id="custom-cols" min="1" max="30" value="9">
+                <label for="custom-mines">Mines:</label>
+                <input type="number" id="custom-mines" min="1" max="667" value="10">
+            </div>
+            <button id="historyButton">History</button>
+        </div>
+        <div id="status-bar">
+            <span id="timer">Time: 0 seconds</span>
+            <span id="game-status" onclick="startGame()">😀</span>
+        </div>
+    </div>
+    <div id="board"></div>
+    <div id="history-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeHistoryModal()">&times;</span>
+            <h2>Game History</h2>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Time</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
