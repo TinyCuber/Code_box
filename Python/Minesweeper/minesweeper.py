@@ -5,7 +5,9 @@ import time
 from datetime import datetime
 
 
+# Define the Minesweeper game class
 class Minesweeper:
+    # Initialization method of the class, receiving a Tkinter root window object
     def __init__(self, root):
         self.root = root
         self.root.title("Minesweeper")
@@ -33,6 +35,7 @@ class Minesweeper:
         
         self.history_records = []
 
+    # Method to show a custom dialog box
     def show_custom_dialog(self):
         dialog = tk.Toplevel(self.root)
         dialog.title("Customize")
@@ -65,6 +68,7 @@ class Minesweeper:
 
         tk.Button(dialog, text="Start", command=start_custom_game).grid(row=3, column=0, columnspan=2)
 
+    # Method to start the game, receiving the width, height, number of mines, and game mode of the game area
     def start_game(self, width, height, mines, mode=None):
         self.current_width = width
         self.current_height = height
@@ -116,12 +120,14 @@ class Minesweeper:
                 self.buttons[y][x].bind("<Button-1>", lambda event, row=y, col=x: self.left_click(row, col))
                 self.buttons[y][x].bind("<Button-3>", lambda event, row=y, col=x: self.right_click(row, col))
 
+    # Method to get the game mode name based on width, height, and number of mines
     def get_mode_name(self, width, height, mines):
         for difficulty, (w, h, m) in self.difficulties.items():
             if w == width and h == height and m == mines:
                 return difficulty
         return ""
 
+    # Method to place mines, receiving the coordinates of a safe area
     def place_mines(self, safe_x, safe_y):
         safe_area = []
         for dy in [-1, 0, 1]:
@@ -145,6 +151,7 @@ class Minesweeper:
                         if 0 <= nx < self.width and 0 <= ny < self.height and self.board[ny][nx] != -1:
                             self.board[ny][nx] += 1
 
+    # Method to handle the left mouse click event, receiving the row and column coordinates of the click
     def left_click(self, row, col):
         if self.first_click:
             self.start_time = time.time()
@@ -162,6 +169,7 @@ class Minesweeper:
         if self.check_win():
             self.win_game()
 
+    # Method to handle the right mouse click event, receiving the row and column coordinates of the click
     def right_click(self, row, col):
         if self.revealed[row][col]:
             return
@@ -180,6 +188,7 @@ class Minesweeper:
 
         self.mines_label.config(text=f"mine: {self.mines - self.flagged}")
 
+    # Method to reveal the content of a cell, receiving the row and column coordinates of the cell
     def reveal_cell(self, row, col):
         if self.revealed[row][col] or self.mark_status[row][col] != 0:
             return
@@ -208,6 +217,7 @@ class Minesweeper:
             color = color_mapping.get(num, "black")
             self.buttons[row][col].config(text=str(num), bg="lightgray", fg=color)
 
+    # Method to check if the player has won the game
     def check_win(self):
         for y in range(self.height):
             for x in range(self.width):
@@ -215,6 +225,7 @@ class Minesweeper:
                     return False
         return True
 
+    # Method to handle the game over situation
     def game_over(self):
         for y in range(self.height):
             for x in range(self.width):
@@ -232,6 +243,7 @@ class Minesweeper:
         self.history_records.append((timestamp, self.current_mode, elapsed_time, "lose"))
         messagebox.showinfo("Game over", "You stepped on a mine!")
 
+    # Method to handle the situation when the player wins the game
     def win_game(self):
         self.elapsed_time = int(time.time() - self.start_time)
         self.game_status_label.config(text="😎")
@@ -239,19 +251,23 @@ class Minesweeper:
         self.history_records.append((timestamp, self.current_mode, self.elapsed_time, "win"))
         messagebox.showinfo("Victory!", f"Congratulations, you won! Time: {self.elapsed_time} s")
 
+    # Method to update the game timer
     def update_timer(self):
         if not self.first_click:
             self.elapsed_time = int(time.time() - self.start_time)
             self.timer_label.config(text=f"time: {self.elapsed_time}")
             self.root.after(1000, self.update_timer)
 
+    # Method to reset the game via an emoji, receiving an event object
     def reset_game_from_emoji(self, event):
         if self.current_width and self.current_height and self.current_mines:
             self.start_game(self.current_width, self.current_height, self.current_mines, mode=self.current_mode)
 
+    # Method to reset the game
     def reset_game(self):
         self.reset_game_from_emoji(None)
 
+    # Method to show the game history
     def show_history(self):
         history_window = tk.Toplevel(self.root, highlightbackground="gray", highlightthickness=5)  # 添加灰色粗边框
         history_window.title("History")
@@ -331,6 +347,7 @@ class Minesweeper:
         canvas.bind_all("<MouseWheel>", _on_mousewheel)
 
 
+# Main program entry point
 if __name__ == "__main__":
     root = tk.Tk()
     game = Minesweeper(root)
