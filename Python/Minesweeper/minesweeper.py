@@ -334,13 +334,11 @@ class Minesweeper:
             
             tk.Button(frame, text="Delete all", command=delete_all).grid(row=len(self.history_records) + 1, column=3)
 
-            # 配置 Canvas 的滚动区域
             frame.update_idletasks()
             canvas.config(scrollregion=canvas.bbox("all"))
 
         populate_history()
 
-        # 绑定鼠标滚轮事件
         def _on_mousewheel(event):
             canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
