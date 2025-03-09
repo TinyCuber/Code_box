@@ -2,11 +2,16 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
+# Default frames per second
 DEFAULT_FPS = 300
+# Default number of rows
 DEFAULT_ROWS = 20
+# Default number of columns
 DEFAULT_COLS = 12
+# Size of each cell
 cell_size = 30
 
+# Define various block shapes using relative coordinates
 SHAPES = {
     "O": [(-1, -1), (0, -1), (-1, 0), (0, 0)],
     "S": [(-1, 0), (0, 0), (0, -1), (1, -1)],
@@ -17,6 +22,7 @@ SHAPES = {
     "Z": [(-1, -1), (0, -1), (0, 0), (1, 0)]
 }
 
+# Define colors for various block shapes
 SHAPESCOLOR = {
     "O": "blue",
     "S": "red",
@@ -27,7 +33,7 @@ SHAPESCOLOR = {
     "Z": "Cyan"
 }
 
-
+# Draw a cell based on column and row indices
 def draw_cell_by_cr(canvas, c, r, color="#CCCCCC"):
     x0 = c * cell_size
     y0 = r * cell_size
@@ -35,7 +41,7 @@ def draw_cell_by_cr(canvas, c, r, color="#CCCCCC"):
     y1 = r * cell_size + cell_size
     canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="white", width=2)
 
-
+# Draw the entire game board
 def draw_board(canvas, block_list):
     for ri in range(len(block_list)):
         for ci in range(len(block_list[0])):
@@ -45,7 +51,7 @@ def draw_board(canvas, block_list):
             else:
                 draw_cell_by_cr(canvas, ci, ri)
 
-
+# Draw a group of cells
 def draw_cells(canvas, c, r, cell_list, color="#CCCCCC"):
     for cell in cell_list:
         cell_c, cell_r = cell
@@ -54,7 +60,7 @@ def draw_cells(canvas, c, r, cell_list, color="#CCCCCC"):
         if 0 <= ci < len(block_list[0]) and 0 <= ri < len(block_list):
             draw_cell_by_cr(canvas, ci, ri, color)
 
-
+# Draw the effect of block movement
 def draw_block_move(canvas, block, direction=[0, 0]):
     shape_type = block['kind']
     c, r = block['cr']
@@ -67,7 +73,7 @@ def draw_block_move(canvas, block, direction=[0, 0]):
     block['cr'] = [new_c, new_r]
     draw_cells(canvas, new_c, new_r, cell_list, SHAPESCOLOR[shape_type])
 
-
+# Generate a new block
 def generate_new_block():
     kind = random.choice(list(SHAPES.keys()))
     cr = [len(block_list[0]) // 2, 0]
@@ -78,7 +84,7 @@ def generate_new_block():
     }
     return new_block
 
-
+# Check if a block can move in the specified direction
 def check_move(block, direction=[0, 0]):
     cc, cr = block['cr']
     cell_list = block['cell_list']
@@ -96,7 +102,7 @@ def check_move(block, direction=[0, 0]):
 
     return True
 
-
+# Save a block to the game board list
 def save_to_block_list(block):
     shape_type = block['kind']
     cc, cr = block['cr']
@@ -109,7 +115,7 @@ def save_to_block_list(block):
 
         block_list[r][c] = shape_type
 
-
+# Handle horizontal movement events of the block
 def horizontal_move_block(event):
     direction = [0, 0]
     if event.keysym == 'Left':
@@ -123,7 +129,7 @@ def horizontal_move_block(event):
     if current_block is not None and check_move(current_block, direction):
         draw_block_move(canvas, current_block, direction)
 
-
+# Handle block rotation events
 def rotate_block(event):
     global current_block
     if current_block is None:
@@ -148,7 +154,7 @@ def rotate_block(event):
         draw_cells(canvas, cc, cr, rotate_list, SHAPESCOLOR[current_block['kind']])
         current_block = block_after_rotate
 
-
+# Handle the event of the block landing directly
 def land(event):
     global current_block
     if current_block is None:
@@ -177,10 +183,10 @@ def land(event):
     if check_move(current_block, down):
         draw_block_move(canvas, current_block, down)
 
-
+# Game score
 score = 0
 
-
+# Check if a row is full
 def check_row_complete(row):
     for cell in row:
         if cell == '':
@@ -188,7 +194,7 @@ def check_row_complete(row):
 
     return True
 
-
+# Check and clear full rows
 def check_and_clear():
     has_complete_row = False
     for ri in range(len(block_list)):
@@ -207,7 +213,7 @@ def check_and_clear():
         draw_board(canvas, block_list)
         win.title("SCORES: %s" % score)
 
-
+# Main game loop
 def game_loop():
     win.update()
     global current_block
@@ -230,7 +236,7 @@ def game_loop():
 
     win.after(FPS, game_loop)
 
-
+# Start the game
 def start_game():
     global FPS, R, C, block_list
     try:
@@ -246,7 +252,6 @@ def start_game():
         restart_button.pack()
         restart_button.config(state=tk.DISABLED)
 
-
         canvas.config(width=C * cell_size, height=R * cell_size)
 
         block_list = []
@@ -261,7 +266,7 @@ def start_game():
     except ValueError:
         messagebox.showerror("Wrong", "Please enter a valid integer!")
 
-
+# Restart the game
 def restart_game():
     global score, block_list, current_block
     score = 0
@@ -269,7 +274,7 @@ def restart_game():
     restart_button.pack_forget()
     setting_frame.pack(side=tk.RIGHT, padx=20)
 
-
+# Toggle custom mode
 def toggle_custom_mode():
     global custom_mode
     custom_mode = not custom_mode
@@ -284,12 +289,11 @@ def toggle_custom_mode():
         label_cols.pack_forget()
         entry_cols.pack_forget()
 
-
-# 创建主窗口
+# Create the main window
 win = tk.Tk()
 win.title("SCORES: %s" % score)
 
-# 创建一个 Frame 来包裹 Canvas，并设置边框样式
+# Create a frame to wrap the canvas and set the border style
 canvas_frame = tk.Frame(win, bd=8, relief=tk.GROOVE, bg="#808080")
 canvas_frame.pack(side=tk.LEFT, pady=20, padx=20)
 
@@ -297,35 +301,35 @@ canvas = tk.Canvas(canvas_frame, width=DEFAULT_COLS * cell_size, height=DEFAULT_
                    highlightthickness=0)
 canvas.pack()
 
-# 创建设置界面
+# Create the settings interface
 setting_frame = tk.Frame(win)
 setting_frame.pack(side=tk.RIGHT, padx=20)
 
-# FPS 设置
-label_fps = tk.Label(setting_frame, text="Please enter FPS（The smaller the value, the faster it falls）：")
+# FPS setting
+label_fps = tk.Label(setting_frame, text="Please enter FPS (The smaller the value, the faster it falls):")
 label_fps.pack(pady=10)
 entry_fps = tk.Entry(setting_frame)
 entry_fps.insert(0, DEFAULT_FPS)
 entry_fps.pack(pady=5)
 
-# 自定义模式开关
+# Custom mode switch
 custom_mode = False
-toggle_button = tk.Button(setting_frame, text="Switch(classic or customized)", command=toggle_custom_mode)
+toggle_button = tk.Button(setting_frame, text="Switch (classic or customized)", command=toggle_custom_mode)
 toggle_button.pack(pady=20)
 
-# 自定义行数和列数设置（初始隐藏）
-label_rows = tk.Label(setting_frame, text="Please enter the height of the game interface（lines）：")
+# Custom row and column settings (initially hidden)
+label_rows = tk.Label(setting_frame, text="Please enter the height of the game interface (rows):")
 entry_rows = tk.Entry(setting_frame)
 entry_rows.insert(0, DEFAULT_ROWS)
-label_cols = tk.Label(setting_frame, text="Please enter the width of the game interface（columns）：")
+label_cols = tk.Label(setting_frame, text="Please enter the width of the game interface (columns):")
 entry_cols = tk.Entry(setting_frame)
 entry_cols.insert(0, DEFAULT_COLS)
 
-# 开始游戏按钮
+# Start game button
 start_button = tk.Button(setting_frame, text="Start", command=start_game)
 start_button.pack(pady=20)
 
-# 创建重新开始按钮，初始时隐藏
+# Create the restart button, initially hidden
 restart_button = tk.Button(win, text="Regame", command=restart_game, state=tk.DISABLED)
 
 block_list = []
